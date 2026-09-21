@@ -1,0 +1,16 @@
+com/libreria/search/SearchStrategy.class
+com/libreria/domain/Book.class
+com/libreria/search/SearchCriteria.class
+com/libreria/search/SimpleSearchStrategy.class
+com/libreria/domain/Review.class
+com/libreria/service/BookService.class
+com/libreria/domain/Rating.class
+com/libreria/domain/ProductType.class
+com/libreria/domain/CatalogPolicy.class
+com/libreria/Main$1.class
+com/libreria/search/SearchCriteria$Builder.class
+com/libreria/search/AdvancedSearchStrategy.class
+com/libreria/Main.class
+com/libreria/repository/BookRepository.class
+com/libreria/domain/Product.class
+com/libreria/domain/ReviewStatus.class
