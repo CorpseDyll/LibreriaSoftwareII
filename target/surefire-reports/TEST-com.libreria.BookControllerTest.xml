@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.libreria.CatalogPolicyTest" time="0.018" tests="4" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.libreria.BookControllerTest" time="1.675" tests="6" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -61,8 +61,421 @@
     <property name="java.class.version" value="65.0"/>
     <property name="LOGGED_APPLICATION_NAME" value="[libreria-software-ii] "/>
   </properties>
-  <testcase name="policy_shouldAllowNonBooksWhenExpanded" classname="com.libreria.CatalogPolicyTest" time="0.003"/>
-  <testcase name="policy_shouldAllowNormalBook" classname="com.libreria.CatalogPolicyTest" time="0.001"/>
-  <testcase name="policy_shouldRejectExpensiveItems" classname="com.libreria.CatalogPolicyTest" time="0.006"/>
-  <testcase name="policy_shouldRejectNonBooksInitially" classname="com.libreria.CatalogPolicyTest" time="0.001"/>
+  <testcase name="advancedSearchEndpoint_shouldReturnMatchingBooks" classname="com.libreria.BookControllerTest" time="0.283">
+    <system-out><![CDATA[2026-09-21T16:06:36.696-05:00  INFO 8383 --- [libreria-software-ii] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.libreria.BookControllerTest]: BookControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-09-21T16:06:36.708-05:00  INFO 8383 --- [libreria-software-ii] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.libreria.LibreriaApplication for test class com.libreria.BookControllerTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.3)
+
+2026-09-21T16:06:36.754-05:00  INFO 8383 --- [libreria-software-ii] [           main] com.libreria.BookControllerTest          : Starting BookControllerTest using Java 21.0.12 with PID 8383 (started by shant in /home/shant/Documents/6_semestre/LibreriaSoftwareII)
+2026-09-21T16:06:36.755-05:00  INFO 8383 --- [libreria-software-ii] [           main] com.libreria.BookControllerTest          : No active profile set, falling back to 1 default profile: "default"
+2026-09-21T16:06:37.048-05:00  INFO 8383 --- [libreria-software-ii] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-09-21T16:06:37.061-05:00  INFO 8383 --- [libreria-software-ii] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 12 ms. Found 1 JPA repository interface.
+2026-09-21T16:06:37.264-05:00  INFO 8383 --- [libreria-software-ii] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-09-21T16:06:37.267-05:00  INFO 8383 --- [libreria-software-ii] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-09-21T16:06:37.274-05:00  INFO 8383 --- [libreria-software-ii] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-09-21T16:06:37.276-05:00  INFO 8383 --- [libreria-software-ii] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2026-09-21T16:06:37.278-05:00  INFO 8383 --- [libreria-software-ii] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection conn10: url=jdbc:h2:mem:libreriadb user=SA
+2026-09-21T16:06:37.278-05:00  INFO 8383 --- [libreria-software-ii] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2026-09-21T16:06:37.279-05:00  WARN 8383 --- [libreria-software-ii] [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-09-21T16:06:37.420-05:00  INFO 8383 --- [libreria-software-ii] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-09-21T16:06:37.438-05:00  INFO 8383 --- [libreria-software-ii] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-09-21T16:06:37.672-05:00  WARN 8383 --- [libreria-software-ii] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-09-21T16:06:37.833-05:00  INFO 8383 --- [libreria-software-ii] [           main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:libreriadb'
+2026-09-21T16:06:37.896-05:00  INFO 8383 --- [libreria-software-ii] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-09-21T16:06:37.897-05:00  INFO 8383 --- [libreria-software-ii] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-09-21T16:06:37.900-05:00  INFO 8383 --- [libreria-software-ii] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2026-09-21T16:06:37.913-05:00  INFO 8383 --- [libreria-software-ii] [           main] com.libreria.BookControllerTest          : Started BookControllerTest in 1.199 seconds (process running for 12.554)
+Hibernate: 
+    select
+        count(*) 
+    from
+        books b1_0
+Hibernate: 
+    select
+        b1_0.id,
+        b1_0.author,
+        b1_0.description,
+        b1_0.genre,
+        b1_0.isbn,
+        b1_0.name,
+        b1_0.price,
+        b1_0.product_type,
+        b1_0.title 
+    from
+        books b1_0 
+    where
+        lower(b1_0.author) like ? escape '' 
+        and lower(b1_0.title) like ? escape ''
+Hibernate: 
+    select
+        r1_0.book_isbn,
+        r1_0.id,
+        r1_0.comment,
+        r1_0.created_at,
+        r1_0.rating_score,
+        r1_0.review_title,
+        r1_0.reviewer_name,
+        r1_0.status 
+    from
+        reviews r1_0 
+    where
+        r1_0.book_isbn=?
+Hibernate: 
+    select
+        r1_0.book_isbn,
+        r1_0.created_at,
+        r1_0.score,
+        r1_0.user_id 
+    from
+        book_ratings r1_0 
+    where
+        r1_0.book_isbn=?
+]]></system-out>
+  </testcase>
+  <testcase name="getAllBooks_shouldReturnBookList" classname="com.libreria.BookControllerTest" time="0.033">
+    <system-out><![CDATA[Hibernate: 
+    select
+        b1_0.id,
+        b1_0.author,
+        b1_0.description,
+        b1_0.genre,
+        b1_0.isbn,
+        b1_0.name,
+        b1_0.price,
+        b1_0.product_type,
+        b1_0.title 
+    from
+        books b1_0
+Hibernate: 
+    select
+        r1_0.book_isbn,
+        r1_0.id,
+        r1_0.comment,
+        r1_0.created_at,
+        r1_0.rating_score,
+        r1_0.review_title,
+        r1_0.reviewer_name,
+        r1_0.status 
+    from
+        reviews r1_0 
+    where
+        r1_0.book_isbn=?
+Hibernate: 
+    select
+        r1_0.book_isbn,
+        r1_0.created_at,
+        r1_0.score,
+        r1_0.user_id 
+    from
+        book_ratings r1_0 
+    where
+        r1_0.book_isbn=?
+Hibernate: 
+    select
+        r1_0.book_isbn,
+        r1_0.id,
+        r1_0.comment,
+        r1_0.created_at,
+        r1_0.rating_score,
+        r1_0.review_title,
+        r1_0.reviewer_name,
+        r1_0.status 
+    from
+        reviews r1_0 
+    where
+        r1_0.book_isbn=?
+Hibernate: 
+    select
+        r1_0.book_isbn,
+        r1_0.created_at,
+        r1_0.score,
+        r1_0.user_id 
+    from
+        book_ratings r1_0 
+    where
+        r1_0.book_isbn=?
+Hibernate: 
+    select
+        r1_0.book_isbn,
+        r1_0.id,
+        r1_0.comment,
+        r1_0.created_at,
+        r1_0.rating_score,
+        r1_0.review_title,
+        r1_0.reviewer_name,
+        r1_0.status 
+    from
+        reviews r1_0 
+    where
+        r1_0.book_isbn=?
+Hibernate: 
+    select
+        r1_0.book_isbn,
+        r1_0.created_at,
+        r1_0.score,
+        r1_0.user_id 
+    from
+        book_ratings r1_0 
+    where
+        r1_0.book_isbn=?
+Hibernate: 
+    select
+        r1_0.book_isbn,
+        r1_0.id,
+        r1_0.comment,
+        r1_0.created_at,
+        r1_0.rating_score,
+        r1_0.review_title,
+        r1_0.reviewer_name,
+        r1_0.status 
+    from
+        reviews r1_0 
+    where
+        r1_0.book_isbn=?
+Hibernate: 
+    select
+        r1_0.book_isbn,
+        r1_0.created_at,
+        r1_0.score,
+        r1_0.user_id 
+    from
+        book_ratings r1_0 
+    where
+        r1_0.book_isbn=?
+Hibernate: 
+    select
+        r1_0.book_isbn,
+        r1_0.id,
+        r1_0.comment,
+        r1_0.created_at,
+        r1_0.rating_score,
+        r1_0.review_title,
+        r1_0.reviewer_name,
+        r1_0.status 
+    from
+        reviews r1_0 
+    where
+        r1_0.book_isbn=?
+Hibernate: 
+    select
+        r1_0.book_isbn,
+        r1_0.created_at,
+        r1_0.score,
+        r1_0.user_id 
+    from
+        book_ratings r1_0 
+    where
+        r1_0.book_isbn=?
+]]></system-out>
+  </testcase>
+  <testcase name="rateBookEndpoint_shouldRegisterRating" classname="com.libreria.BookControllerTest" time="0.045">
+    <system-out><![CDATA[Hibernate: 
+    select
+        b1_0.id,
+        b1_0.author,
+        b1_0.description,
+        b1_0.genre,
+        b1_0.isbn,
+        b1_0.name,
+        b1_0.price,
+        b1_0.product_type,
+        b1_0.title 
+    from
+        books b1_0 
+    where
+        b1_0.isbn=?
+Hibernate: 
+    select
+        r1_0.book_isbn,
+        r1_0.id,
+        r1_0.comment,
+        r1_0.created_at,
+        r1_0.rating_score,
+        r1_0.review_title,
+        r1_0.reviewer_name,
+        r1_0.status 
+    from
+        reviews r1_0 
+    where
+        r1_0.book_isbn=?
+Hibernate: 
+    select
+        r1_0.book_isbn,
+        r1_0.created_at,
+        r1_0.score,
+        r1_0.user_id 
+    from
+        book_ratings r1_0 
+    where
+        r1_0.book_isbn=?
+Hibernate: 
+    insert 
+    into
+        book_ratings
+        (book_isbn, created_at, score, user_id) 
+    values
+        (?, ?, ?, ?)
+]]></system-out>
+  </testcase>
+  <testcase name="simpleSearchEndpoint_shouldReturnMatchingBooks" classname="com.libreria.BookControllerTest" time="0.024">
+    <system-out><![CDATA[Hibernate: 
+    select
+        b1_0.id,
+        b1_0.author,
+        b1_0.description,
+        b1_0.genre,
+        b1_0.isbn,
+        b1_0.name,
+        b1_0.price,
+        b1_0.product_type,
+        b1_0.title 
+    from
+        books b1_0 
+    where
+        upper(b1_0.title) like upper(?) escape '\' 
+        or upper(b1_0.author) like upper(?) escape '\'
+Hibernate: 
+    select
+        r1_0.book_isbn,
+        r1_0.id,
+        r1_0.comment,
+        r1_0.created_at,
+        r1_0.rating_score,
+        r1_0.review_title,
+        r1_0.reviewer_name,
+        r1_0.status 
+    from
+        reviews r1_0 
+    where
+        r1_0.book_isbn=?
+Hibernate: 
+    select
+        r1_0.book_isbn,
+        r1_0.created_at,
+        r1_0.score,
+        r1_0.user_id 
+    from
+        book_ratings r1_0 
+    where
+        r1_0.book_isbn=?
+]]></system-out>
+  </testcase>
+  <testcase name="submitReviewEndpoint_shouldPublishReview" classname="com.libreria.BookControllerTest" time="0.028">
+    <system-out><![CDATA[Hibernate: 
+    select
+        b1_0.id,
+        b1_0.author,
+        b1_0.description,
+        b1_0.genre,
+        b1_0.isbn,
+        b1_0.name,
+        b1_0.price,
+        b1_0.product_type,
+        b1_0.title 
+    from
+        books b1_0 
+    where
+        b1_0.isbn=?
+Hibernate: 
+    select
+        r1_0.book_isbn,
+        r1_0.id,
+        r1_0.comment,
+        r1_0.created_at,
+        r1_0.rating_score,
+        r1_0.review_title,
+        r1_0.reviewer_name,
+        r1_0.status 
+    from
+        reviews r1_0 
+    where
+        r1_0.book_isbn=?
+Hibernate: 
+    select
+        r1_0.book_isbn,
+        r1_0.created_at,
+        r1_0.score,
+        r1_0.user_id 
+    from
+        book_ratings r1_0 
+    where
+        r1_0.book_isbn=?
+Hibernate: 
+    insert 
+    into
+        reviews
+        (book_isbn, comment, created_at, rating_score, review_title, reviewer_name, status, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, default)
+Hibernate: 
+    delete 
+    from
+        book_ratings 
+    where
+        book_isbn=?
+Hibernate: 
+    insert 
+    into
+        book_ratings
+        (book_isbn, created_at, score, user_id) 
+    values
+        (?, ?, ?, ?)
+Hibernate: 
+    insert 
+    into
+        book_ratings
+        (book_isbn, created_at, score, user_id) 
+    values
+        (?, ?, ?, ?)
+]]></system-out>
+  </testcase>
+  <testcase name="previewReviewEndpoint_shouldReturnPreview" classname="com.libreria.BookControllerTest" time="0.02">
+    <system-out><![CDATA[Hibernate: 
+    select
+        b1_0.id,
+        b1_0.author,
+        b1_0.description,
+        b1_0.genre,
+        b1_0.isbn,
+        b1_0.name,
+        b1_0.price,
+        b1_0.product_type,
+        b1_0.title 
+    from
+        books b1_0 
+    where
+        b1_0.isbn=?
+Hibernate: 
+    select
+        r1_0.book_isbn,
+        r1_0.id,
+        r1_0.comment,
+        r1_0.created_at,
+        r1_0.rating_score,
+        r1_0.review_title,
+        r1_0.reviewer_name,
+        r1_0.status 
+    from
+        reviews r1_0 
+    where
+        r1_0.book_isbn=?
+Hibernate: 
+    select
+        r1_0.book_isbn,
+        r1_0.created_at,
+        r1_0.score,
+        r1_0.user_id 
+    from
+        book_ratings r1_0 
+    where
+        r1_0.book_isbn=?
+]]></system-out>
+  </testcase>
 </testsuite>

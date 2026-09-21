@@ -1,17 +1,36 @@
 package com.libreria.domain;
 
+import jakarta.persistence.*;
 import java.util.ArrayList;
-
 import java.util.Collections;
 import java.util.List;
 
+@Entity
+@Table(name = "books")
 public class Book extends Product {
-    private final String isbn;
-    private final String title;
-    private final String author;
-    private final String genre;
-    private final List<Rating> ratings;
-    private final List<Review> reviews;
+
+    @Column(name = "isbn", nullable = false, unique = true)
+    private String isbn;
+
+    @Column(name = "title", nullable = false)
+    private String title;
+
+    @Column(name = "author", nullable = false)
+    private String author;
+
+    @Column(name = "genre")
+    private String genre;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "book_ratings", joinColumns = @JoinColumn(name = "book_isbn", referencedColumnName = "id"))
+    private List<RatingEmbeddable> ratings = new ArrayList<>();
+
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<Review> reviews = new ArrayList<>();
+
+    public Book() {
+        super();
+    }
 
     public Book(String id, String isbn, String title, String author, double price, String genre, String description) {
         super(id, title, price, description, ProductType.BOOK);
@@ -25,8 +44,6 @@ public class Book extends Product {
         this.title = title.trim();
         this.author = author.trim();
         this.genre = genre != null ? genre.trim() : "General";
-        this.ratings = new ArrayList<>();
-        this.reviews = new ArrayList<>();
     }
 
     public String getIsbn() {
@@ -45,7 +62,7 @@ public class Book extends Product {
         return genre;
     }
 
-    public synchronized void addRating(Rating rating) {
+    public synchronized void addRating(RatingEmbeddable rating) {
         if (rating != null) {
             this.ratings.add(rating);
         }
@@ -56,13 +73,13 @@ public class Book extends Product {
             if (review.getStatus() != ReviewStatus.SUBMITTED) {
                 review.submit();
             }
+            review.setBook(this);
             this.reviews.add(review);
-            // Also automatically append review's rating to ratings list if not already included
-            this.ratings.add(review.getRating());
+            this.ratings.add(new RatingEmbeddable(review.getRatingScore(), review.getReviewerName(), review.getCreatedAt()));
         }
     }
 
-    public List<Rating> getRatings() {
+    public List<RatingEmbeddable> getRatings() {
         return Collections.unmodifiableList(ratings);
     }
 
@@ -71,22 +88,22 @@ public class Book extends Product {
     }
 
     public double getAverageRating() {
-        if (ratings.isEmpty()) {
+        if (ratings == null || ratings.isEmpty()) {
             return 0.0;
         }
         double sum = 0.0;
-        for (Rating r : ratings) {
+        for (RatingEmbeddable r : ratings) {
             sum += r.getScore();
         }
         return sum / ratings.size();
     }
 
     public int getTotalRatingsCount() {
-        return ratings.size();
+        return ratings != null ? ratings.size() : 0;
     }
 
     public int getTotalReviewsCount() {
-        return reviews.size();
+        return reviews != null ? reviews.size() : 0;
     }
 
     @Override

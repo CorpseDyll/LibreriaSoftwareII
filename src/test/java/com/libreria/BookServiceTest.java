@@ -1,27 +1,28 @@
 package com.libreria;
 
 import com.libreria.domain.Book;
+import com.libreria.domain.RatingEmbeddable;
 import com.libreria.domain.Review;
 import com.libreria.domain.ReviewStatus;
 import com.libreria.search.SearchCriteria;
 import com.libreria.service.BookService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+@SpringBootTest
+@Transactional
 class BookServiceTest {
 
+    @Autowired
     private BookService service;
-
-    @BeforeEach
-    void setUp() {
-        service = new BookService();
-    }
 
     @Test
     @DisplayName("Requirement 1: Basic simple search in both author and title fields")
@@ -49,7 +50,7 @@ class BookServiceTest {
     }
 
     @Test
-    @DisplayName("Requirement 3: Rate books from 1 (bad) to 5 (good) without purchase check")
+    @DisplayName("Requirement 3: Rate books from 1 (bad) to 5 (good) without purchase check (JPA Persisted)")
     void userStory3_rateBook() {
         String isbn = "978-0132350884"; // Clean Code
 
@@ -71,7 +72,7 @@ class BookServiceTest {
     }
 
     @Test
-    @DisplayName("Requirement 4: Write review, preview before submitting, no purchase required")
+    @DisplayName("Requirement 4: Write review, preview before submitting, no purchase required (JPA Persisted)")
     void userStory4_writePreviewAndSubmitReview() {
         String isbn = "978-0201633610"; // Design Patterns
 

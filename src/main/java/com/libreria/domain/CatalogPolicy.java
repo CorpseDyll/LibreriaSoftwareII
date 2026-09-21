@@ -1,10 +1,13 @@
 package com.libreria.domain;
 
+import org.springframework.stereotype.Component;
+
 /**
- * Regla de negocio y política de catálogo:
+ * Regla de negocio y política de catálogo (Spring Component):
  * Inicialmente solo se permite vender libros y se restringen productos de alto valor (>$10,000).
  * La clase permite ser reconfigurada en el futuro cuando el sitio expanda sus ventas a todo el catálogo.
  */
+@Component
 public class CatalogPolicy {
     private boolean onlyBooksAllowed;
     private double maxAllowedPrice;
