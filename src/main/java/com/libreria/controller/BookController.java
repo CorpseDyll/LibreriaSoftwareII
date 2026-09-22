@@ -47,7 +47,7 @@ public class BookController {
      * Ejemplo: GET /api/books/search?query=Robert
      */
     @GetMapping("/search")
-    public ResponseEntity<List<Book>> simpleSearch(@RequestParam(required = false, defaultValue = "") String query) {
+    public ResponseEntity<List<Book>> simpleSearch(@RequestParam(name = "query", required = false, defaultValue = "") String query) {
         return ResponseEntity.ok(bookService.simpleSearch(query));
     }
 
