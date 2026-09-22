@@ -1,0 +1,29 @@
+# Archivos de entorno y credenciales (¡MUY IMPORTANTE!)
+.env
+*.env
+application-local.properties
+application-local.yml
+
+# Archivos de compilación de Java y Spring Boot
+target/
+build/
+*.class
+*.jar
+*.war
+
+# Configuración de IDEs (IntelliJ IDEA, Eclipse, VS Code)
+.idea/
+*.iml
+*.iws
+.eclipse/
+.classpath
+.project
+.settings/
+.vscode/
+
+# Archivos de sistema operativo
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
