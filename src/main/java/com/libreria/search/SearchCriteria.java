@@ -1,9 +1,15 @@
 package com.libreria.search;
 
 public class SearchCriteria {
-    private final String author;
-    private final String title;
-    private final String isbn;
+    private String author;
+    private String title;
+    private String isbn;
+
+    public SearchCriteria(){
+        this.author = "";
+        this.title = "";
+        this.isbn = "";
+    }
 
     public SearchCriteria(String author, String title, String isbn) {
         this.author = author != null ? author.trim() : "";

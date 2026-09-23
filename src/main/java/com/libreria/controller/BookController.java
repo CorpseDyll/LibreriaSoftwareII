@@ -35,7 +35,7 @@ public class BookController {
      * Obtener un libro por su ISBN.
      */
     @GetMapping("/{isbn}")
-    public ResponseEntity<?> getBookByIsbn(@PathVariable String isbn) {
+    public ResponseEntity<?> getBookByIsbn(@PathVariable(name = "isbn") String isbn) {
         return bookService.findByIsbn(isbn)
                 .<ResponseEntity<?>>map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -47,7 +47,7 @@ public class BookController {
      * Ejemplo: GET /api/books/search?query=Robert
      */
     @GetMapping("/search")
-    public ResponseEntity<List<Book>> simpleSearch(@RequestParam(required = false, defaultValue = "") String query) {
+    public ResponseEntity<List<Book>> simpleSearch(@RequestParam(name = "query", required = false, defaultValue = "") String query) {
         return ResponseEntity.ok(bookService.simpleSearch(query));
     }
 
@@ -65,7 +65,7 @@ public class BookController {
      * Ejemplo: POST /api/books/978-0132350884/ratings  payload: { "userId": "user123", "score": 5 }
      */
     @PostMapping("/{isbn}/ratings")
-    public ResponseEntity<?> rateBook(@PathVariable String isbn, @RequestBody RatingDto ratingDto) {
+    public ResponseEntity<?> rateBook(@PathVariable(name = "isbn") String isbn, @RequestBody RatingDto ratingDto) {
         try {
             Book updatedBook = bookService.rateBook(isbn, ratingDto.getUserId(), ratingDto.getScore());
             return ResponseEntity.ok(Map.of(

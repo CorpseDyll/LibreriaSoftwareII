@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Libreria Software II</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Libreria Software II</h1>
+        <p>Bienvenidos a nuestra libreria virtual</p>
+    </header>
+    <main class="library-content">
+        <div class="search-section">
+            <input
+                type="text"
+                id="search-input"
+                placeholder="Buscar por título o autor..."
+            >
+            <button id="search-button">Buscar</button>
+        </div>
+        <div class="advanced-search-link-container">
+            <button id="advance-search-link" type="button">
+                Búsqueda avanzada...
+            </button>
+        </div>
+        <h2>Libros disponibles</h2>
+        <div id="books-container">
+
+        </div>
+    </main>
+    <div id="book-modal" class="book-modal">
+        <div class="book-modal-content">
+            <button id="close-modal" class="close-modal">
+                ✕
+            </button>
+            <h2 id="modal-title"></h2>
+            <p class="modal-author" id="modal-author"></p>
+            <div class="modal-divider"></div>
+            <h3>Descripción</h3>
+            <p id="modal-description"></p>
+            <div class="modal-divider"></div>
+            <h3>Detalles</h3>
+            <p>
+                <strong>ISBN:</strong>
+                <span id="modal-isbn"></span>
+            </p>
+            <p>
+                <strong>Género:</strong>
+                <span id="modal-genre"></span>
+            </p>
+            <p>
+                <strong>Tipo:</strong>
+                <span id="modal-type"></span>
+            </p>
+            <p>
+                <strong>Precio:</strong>
+                $<span id="modal-price"></span>
+            </p>
+            <p>
+                <strong>Calificación actual:</strong>
+                ⭐ <span id="modal-rating"></span>
+            </p>
+            <p>
+                <strong>Valoraciones:</strong>
+                <span id="modal-rating-count"></span>
+            </p>
+            <div class="modal-divider"></div>
+            <div class="rating-section">
+                <h3>⭐ Valora este libro</h3>
+                <div id="rating-stars" class="rating-stars">
+                    <button type="button" data-score="1">☆</button>
+                    <button type="button" data-score="2">☆</button>
+                    <button type="button" data-score="3">☆</button>
+                    <button type="button" data-score="4">☆</button>
+                    <button type="button" data-score="5">☆</button>
+                </div>
+                <p id="selected-rating">
+                    Selecciona una calificación de 1 a 5.
+                </p>
+                <button id="submit-rating" class="submit-rating">
+                    Enviar valoración
+                </button>
+            </div>
+            <div class="modal-divider"></div>
+            <div class="reviews-section">
+                <h3>📝 Reseñas</h3>
+                <p>Comparte tu opinión sobre este libro.</p>
+                <button id="write-review-button" class="submit-rating">
+                    Escribir reseña
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="advanced-search-modal" class="book-modal">
+        <div class="book-modal-content advanced-search-content">
+            <button id="close-advanced-search" class="close-modal">
+                ✕
+            </button>
+            <h2>Búsqueda avanzada</h2>
+            <div class="advanced-search-field">
+                <label for="advanced-author">Autor</label>
+                <input
+                        type="text"
+                        id="advanced-author"
+                        placeholder="Nombre del autor"
+                >
+            </div>
+            <div class="advanced-search-field">
+                <label for="advanced-title">Título</label>
+                <input
+                        type="text"
+                        id="advanced-title"
+                        placeholder="Título del libro"
+                >
+            </div>
+            <div class="advanced-search-field">
+                <label for="advanced-isbn">ISBN</label>
+                <input
+                        type="text"
+                        id="advanced-isbn"
+                        placeholder="ISBN del libro"
+                >
+            </div>
+            <button id="advanced-search-button" class="submit-rating">
+                Buscar
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
