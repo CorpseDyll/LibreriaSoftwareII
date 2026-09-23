@@ -33,6 +33,82 @@ function renderBooks(books){
     });
 }
 
+let selectedScore = 0;
+const ratingStars = document.querySelectorAll("#rating-stars button");
+const selectedRating = document.getElementById("selected-rating");
+
+const submitRating = document.getElementById("submit-rating");
+
+ratingStars.forEach(star => {
+    star.addEventListener("mouseenter", () => {
+        const score = Number(star.dataset.score);
+        ratingStars.forEach(s => {
+            const starScore = Number(s.dataset.score);
+            s.textContent =starScore <= score ? "★" : "☆";
+        });
+    });
+});
+
+ratingStars.forEach(star => {
+    star.addEventListener("click", () => {
+        selectedScore = Number(star.dataset.score);
+        selectedRating.textContent =
+            `Tu valoración: ${selectedScore}/5`;
+    });
+});
+
+document.getElementById("rating-stars").addEventListener("mouseleave", () => {
+    ratingStars.forEach(star => {
+        const starScore = Number(star.dataset.score);
+        star.textContent =
+            starScore <= selectedScore ? "★" : "☆";
+    });
+});
+
+submitRating.addEventListener("click", () => {
+    if (selectedScore === 0) {
+        selectedRating.textContent =
+            "Selecciona una calificación antes de enviar.";
+        return;
+    }
+
+    const isbn = document.getElementById("modal-isbn").textContent;
+    fetch(`/api/books/${isbn}/ratings`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            userId: "Anónimo",
+            score: selectedScore
+        })
+    })
+
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(error => {
+                    throw new Error(error.error || "Error al enviar la valoración.");
+                });
+            }
+            return response.json();
+        })
+
+        .then(data => {
+            console.log("Valoración registrada:", data);
+            document.getElementById("modal-rating").textContent =
+                data.calificacionPromedio;
+            document.getElementById("modal-rating-count").textContent =
+                data.totalValoraciones;
+            selectedRating.textContent =
+                `¡Gracias por tu valoración de ${selectedScore}/5!`;
+        })
+        .catch(error => {
+            console.error("Error al enviar valoración:", error);
+            selectedRating.textContent =
+                "No se pudo registrar la valoración.";
+        });
+})
+
 document.addEventListener("click", (event) => {
     if (event.target.classList.contains("details-button")) {
         const isbn = event.target.dataset.isbn;

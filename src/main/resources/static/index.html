@@ -32,6 +32,10 @@
             <h2 id="modal-title"></h2>
             <p class="modal-author" id="modal-author"></p>
             <div class="modal-divider"></div>
+            <h3>Descripción</h3>
+            <p id="modal-description"></p>
+            <div class="modal-divider"></div>
+            <h3>Detalles</h3>
             <p>
                 <strong>ISBN:</strong>
                 <span id="modal-isbn"></span>
@@ -46,19 +50,33 @@
             </p>
             <p>
                 <strong>Precio:</strong>
-                <span id="modal-price"></span>
+                $<span id="modal-price"></span>
             </p>
             <p>
-                <strong>Calificación:</strong>
-                <span id="modal-rating"></span>
+                <strong>Calificación actual:</strong>
+                ⭐ <span id="modal-rating"></span>
             </p>
             <p>
                 <strong>Valoraciones:</strong>
                 <span id="modal-rating-count"></span>
             </p>
             <div class="modal-divider"></div>
-            <h3>Descripción</h3>
-            <p id="modal-description"></p>
+            <div class="rating-section">
+                <h3>⭐ Valora este libro</h3>
+                <div id="rating-stars" class="rating-stars">
+                    <button type="button" data-score="1">☆</button>
+                    <button type="button" data-score="2">☆</button>
+                    <button type="button" data-score="3">☆</button>
+                    <button type="button" data-score="4">☆</button>
+                    <button type="button" data-score="5">☆</button>
+                </div>
+                <p id="selected-rating">
+                    Selecciona una calificación de 1 a 5.
+                </p>
+                <button id="submit-rating" class="submit-rating">
+                    Enviar valoración
+                </button>
+            </div>
         </div>
     </div>
     <script src="script.js"></script>

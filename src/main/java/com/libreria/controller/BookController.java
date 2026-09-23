@@ -65,7 +65,7 @@ public class BookController {
      * Ejemplo: POST /api/books/978-0132350884/ratings  payload: { "userId": "user123", "score": 5 }
      */
     @PostMapping("/{isbn}/ratings")
-    public ResponseEntity<?> rateBook(@PathVariable String isbn, @RequestBody RatingDto ratingDto) {
+    public ResponseEntity<?> rateBook(@PathVariable(name = "isbn") String isbn, @RequestBody RatingDto ratingDto) {
         try {
             Book updatedBook = bookService.rateBook(isbn, ratingDto.getUserId(), ratingDto.getScore());
             return ResponseEntity.ok(Map.of(
