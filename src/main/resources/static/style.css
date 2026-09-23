@@ -89,6 +89,82 @@ header {
     padding: 30px;
 }
 
+.book-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(74, 52, 40, 0.55);
+
+    justify-content: center;
+    align-items: center;
+}
+
+.book-modal-content {
+    background-color: #FFF9EF;
+    color: #4A3428;
+
+    width: 90%;
+    max-width: 600px;
+
+    padding: 30px;
+    border-radius: 16px;
+
+    box-shadow: 0 10px 30px rgba(74, 52, 40, 0.3);
+
+    position: relative;
+
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 18px;
+    background: none;
+    border: none;
+    color: #7A263A;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.close-modal:hover {
+    color: #551C2A;
+}
+
+.book-modal-content h2 {
+    color: #7A263A;
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.modal-author {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.modal-divider {
+    height: 1px;
+    background-color: #D8C5AE;
+    margin: 20px 0;
+}
+
+.book-modal-content p {
+    line-height: 1.6;
+}
+
+.book-modal-content strong {
+    color: #7A263A;
+}
+
+.book-modal-content h3 {
+    color: #7A263A;
+}
+
 #books-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);

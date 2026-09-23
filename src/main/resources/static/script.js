@@ -25,13 +25,44 @@ function renderBooks(books){
                     ${book.price}
                 </p>
             </div>
-            <button class="details-button">
+            <button class="details-button" data-isbn="${book.isbn}">
                 Ver detalles
             </button>
         `;
        container.appendChild(card);
     });
 }
+
+document.addEventListener("click", (event) => {
+    if (event.target.classList.contains("details-button")) {
+        const isbn = event.target.dataset.isbn;
+        console.log("ISBN seleccionado:", isbn);
+        fetch(`/api/books/${isbn}`)
+            .then(response => response.json())
+            .then(book => {
+                document.getElementById("modal-title").textContent = book.name;
+                document.getElementById("modal-author").textContent = book.author;
+                document.getElementById("modal-isbn").textContent = book.isbn;
+                document.getElementById("modal-genre").textContent = book.genre;
+                document.getElementById("modal-type").textContent = book.productType;
+                document.getElementById("modal-price").textContent = book.price;
+                document.getElementById("modal-rating").textContent = book.averageRating;
+                document.getElementById("modal-rating-count").textContent = book.totalRatingsCount;
+                document.getElementById("modal-description").textContent = book.description;
+                document.getElementById("book-modal").style.display = "flex";
+            });
+    }
+});
+
+document.getElementById("close-modal").addEventListener("click", () => {
+    document.getElementById("book-modal").style.display = "none";
+});
+
+document.getElementById("close-modal").addEventListener("click", (event) => {
+    if (event.target.id === "book-modal"){
+        document.getElementById("close-modal").style.display = "none";
+    }
+});
 
 fetch("/api/books")
     .then(response => response.json())

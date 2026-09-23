@@ -35,7 +35,7 @@ public class BookController {
      * Obtener un libro por su ISBN.
      */
     @GetMapping("/{isbn}")
-    public ResponseEntity<?> getBookByIsbn(@PathVariable String isbn) {
+    public ResponseEntity<?> getBookByIsbn(@PathVariable(name = "isbn") String isbn) {
         return bookService.findByIsbn(isbn)
                 .<ResponseEntity<?>>map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND)
