@@ -19,6 +19,11 @@
             >
             <button id="search-button">Buscar</button>
         </div>
+        <div class="advanced-search-link-container">
+            <button id="advance-search-link" type="button">
+                Búsqueda avanzada...
+            </button>
+        </div>
         <h2>Libros disponibles</h2>
         <div id="books-container">
 
@@ -27,7 +32,7 @@
     <div id="book-modal" class="book-modal">
         <div class="book-modal-content">
             <button id="close-modal" class="close-modal">
-                X
+                ✕
             </button>
             <h2 id="modal-title"></h2>
             <p class="modal-author" id="modal-author"></p>
@@ -79,6 +84,44 @@
             </div>
         </div>
     </div>
+
+    <div id="advanced-search-modal" class="book-modal">
+        <div class="book-modal-content advanced-search-content">
+            <button id="close-advanced-search" class="close-modal">
+                ✕
+            </button>
+            <h2>Búsqueda avanzada</h2>
+            <div class="advanced-search-field">
+                <label for="advanced-author">Autor</label>
+                <input
+                        type="text"
+                        id="advanced-author"
+                        placeholder="Nombre del autor"
+                >
+            </div>
+            <div class="advanced-search-field">
+                <label for="advanced-title">Título</label>
+                <input
+                        type="text"
+                        id="advanced-title"
+                        placeholder="Título del libro"
+                >
+            </div>
+            <div class="advanced-search-field">
+                <label for="advanced-isbn">ISBN</label>
+                <input
+                        type="text"
+                        id="advanced-isbn"
+                        placeholder="ISBN del libro"
+                >
+            </div>
+            <button id="advanced-search-button" class="submit-rating">
+                Buscar
+            </button>
+        </div>
+    </div>
+
     <script src="script.js"></script>
+
 </body>
 </html>

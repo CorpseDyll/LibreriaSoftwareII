@@ -150,6 +150,60 @@ document.getElementById("close-modal").addEventListener("click", (event) => {
     }
 });
 
+const advancedSearchLink = document.getElementById("advance-search-link");
+const advancedSearchModal = document.getElementById("advanced-search-modal");
+const closedAdvancedSearch = document.getElementById("close-advanced-search");
+
+advancedSearchLink.addEventListener("click", () => {
+    advancedSearchModal.style.display = "flex";
+});
+
+closedAdvancedSearch.addEventListener("click", () => {
+    advancedSearchModal.style.display = "none";
+});
+
+advancedSearchModal.addEventListener("click", (event) => {
+    if (event.target.id === "advanced-search-modal") {
+        advancedSearchModal.style.display = "none";
+    }
+});
+
+const advancedSearchButton = document.getElementById("advanced-search-button");
+
+const advancedAuthor = document.getElementById("advanced-author");
+const advancedTitle = document.getElementById("advanced-title");
+const advancedIsbn = document.getElementById("advanced-isbn");
+
+advancedSearchButton.addEventListener("click", () => {
+    const author = advancedAuthor.value;
+    const title = advancedTitle.value;
+    const isbn = advancedIsbn.value;
+    fetch("/api/books/search/advanced", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            author: author,
+            title: title,
+            isbn: isbn
+        })
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Error al realizar la búsqueda avanzada.");
+            }
+            return response.json();
+        })
+        .then(data => {
+            renderBooks(data);
+            advancedSearchModal.style.display = "none";
+        })
+        .catch(error => {
+            console.error("Error en búsqueda avanzada:", error);
+        });
+});
+
 fetch("/api/books")
     .then(response => response.json())
     .then(books => {
