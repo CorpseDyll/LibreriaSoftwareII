@@ -221,6 +221,12 @@ header {
     background-color: #551C2A;
 }
 
+.submit-rating:disabled {
+    background-color: #B9A99A;
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
 #books-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);

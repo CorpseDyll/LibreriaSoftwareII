@@ -101,6 +101,8 @@ submitRating.addEventListener("click", () => {
                 data.totalValoraciones;
             selectedRating.textContent =
                 `¡Gracias por tu valoración de ${selectedScore}/5!`;
+            submitRating.textContent = "Valoración enviada ✓";
+            submitRating.disabled = true;
         })
         .catch(error => {
             console.error("Error al enviar valoración:", error);
@@ -125,6 +127,14 @@ document.addEventListener("click", (event) => {
                 document.getElementById("modal-rating").textContent = book.averageRating;
                 document.getElementById("modal-rating-count").textContent = book.totalRatingsCount;
                 document.getElementById("modal-description").textContent = book.description;
+                selectedScore = 0;
+                selectedRating.textContent =
+                    "Selecciona una calificación de 1 a 5.";
+                submitRating.textContent = "Enviar valoración";
+                submitRating.disabled = false;
+                ratingStars.forEach(star => {
+                    star.textContent = "☆";
+                });
                 document.getElementById("book-modal").style.display = "flex";
             });
     }
