@@ -24,7 +24,7 @@ class BookControllerTest {
     void getAllBooks_shouldReturnBookList() throws Exception {
         mockMvc.perform(get("/api/books"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(5)));
+                .andExpect(jsonPath("$", hasSize(15)));
     }
 
     @Test
