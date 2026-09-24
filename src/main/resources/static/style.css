@@ -308,3 +308,112 @@ header {
     display: block;
     margin: 5px auto 0;
 }
+
+.review-modal-content {
+    max-width: 550px;
+}
+
+.review-modal-content h2 {
+    color: #7A263A;
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+
+.review-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.review-form label {
+    color: #4A3428;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+.review-form input,
+.review-form textarea {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #C8C8C8;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #000000;
+    background-color: #FFFFFF;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+.review-form input:focus,
+.review-form textarea:focus {
+    outline: none;
+    border: 2px solid #7A263A;
+}
+
+.review-form textarea {
+    resize: vertical;
+    min-height: 130px;
+}
+
+#review-stars {
+    display: flex;
+    gap: 6px;
+    margin: 5px 0 10px;
+}
+
+#review-stars button {
+    background: none;
+    border: none;
+    color: #7A263A;
+    font-size: 32px;
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.15s ease;
+}
+
+#review-stars button:hover {
+    transform: scale(1.15);
+}
+
+#preview-review-button {
+    align-self: center;
+    margin-top: 15px;
+}
+
+.review-preview-content {
+    max-width: 600px;
+}
+
+.review-preview-content h2 {
+    color: #7A263A;
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+
+.review-preview h3 {
+    color: #4A3428;
+    margin-bottom: 10px;
+}
+
+.preview-reviewer {
+    color: #4A3428;
+    margin-bottom: 15px;
+}
+
+.preview-review-rating {
+    color: #7A263A;
+    font-size: 26px;
+    letter-spacing: 3px;
+}
+
+#preview-review-comment {
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+.review-preview-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 25px;
+}

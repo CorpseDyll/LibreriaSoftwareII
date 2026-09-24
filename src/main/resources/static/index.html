@@ -93,6 +93,72 @@
         </div>
     </div>
 
+    <div id="review-modal" class="book-modal">
+        <div class="book-modal-content review-modal-content">
+            <button id="close-review-modal" class="close-modal">
+                ✕
+            </button>
+            <h2>Escribir reseña</h2>
+            <div class="review-form">
+                <label for="reviewer-name">Nombre</label>
+                <input
+                        type="text"
+                        id="reviewer-name"
+                        placeholder="Tu nombre"
+                >
+                <label for="review-title">Título de la reseña</label>
+                <input
+                        type="text"
+                        id="review-title"
+                        placeholder="Título de tu reseña"
+                >
+                <label>Calificación</label>
+                <div id="review-stars" class="rating-stars">
+                    <button type="button" data-score="1">☆</button>
+                    <button type="button" data-score="2">☆</button>
+                    <button type="button" data-score="3">☆</button>
+                    <button type="button" data-score="4">☆</button>
+                    <button type="button" data-score="5">☆</button>
+                </div>
+                <label for="review-comment">Comentario</label>
+                <textarea
+                        id="review-comment"
+                        placeholder="Escribe tu opinión sobre este libro..."
+                        rows="6"
+                ></textarea>
+                <button id="preview-review-button" class="submit-rating">
+                    Previsualizar reseña
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="review-preview-modal" class="book-modal">
+        <div class="book-modal-content review-preview-content">
+            <button id="close-review-preview" class="close-modal">
+                ✕
+            </button>
+            <h2>Vista previa de la reseña</h2>
+            <div class="review-preview">
+                <h3 id="preview-review-title"></h3>
+                <p class="preview-reviewer">
+                    Por: <span id="preview-reviewer-name"></span>
+                </p>
+                <p id="preview-review-rating" class="preview-review-rating"></p>
+                <div class="modal-divider"></div>
+                <p id="preview-review-comment"></p>
+            </div>
+            <div class="review-preview-actions">
+                <button id="back-to-review" class="submit-rating">
+                    Volver a editar
+                </button>
+                <button id="publish-review" class="submit-rating">
+                    Publicar reseña
+                </button>
+            </div>
+        </div>
+    </div>
+
     <div id="advanced-search-modal" class="book-modal">
         <div class="book-modal-content advanced-search-content">
             <button id="close-advanced-search" class="close-modal">

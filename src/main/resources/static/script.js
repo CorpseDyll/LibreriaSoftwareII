@@ -22,7 +22,7 @@ function renderBooks(books){
                     ${book.genre}
                 </p>
                 <p class="book-price">
-                    ${book.price}
+                    $${Number(book.price).toFixed(2)}
                 </p>
             </div>
             <button class="details-button" data-isbn="${book.isbn}">
@@ -140,6 +140,171 @@ document.addEventListener("click", (event) => {
     }
 });
 
+let selectedReviewScore = 0;
+const reviewStars = document.querySelectorAll("#review-stars button");
+
+reviewStars.forEach(star => {
+    star.addEventListener("mouseenter", () => {
+        const score = Number(star.dataset.score);
+
+        reviewStars.forEach(s => {
+            const starScore = Number(s.dataset.score);
+            s.textContent = starScore <= score ? "★" : "☆";
+        });
+    });
+
+    star.addEventListener("click", () => {
+        selectedReviewScore = Number(star.dataset.score);
+
+        reviewStars.forEach(s => {
+            const starScore = Number(s.dataset.score);
+            s.textContent =
+                starScore <= selectedReviewScore ? "★" : "☆";
+        });
+    });
+});
+
+document.getElementById("review-stars").addEventListener("mouseleave", () => {
+    reviewStars.forEach(star => {
+        const starScore = Number(star.dataset.score);
+
+        star.textContent =
+            starScore <= selectedReviewScore ? "★" : "☆";
+    });
+});
+
+const previewReviewButton = document.getElementById("preview-review-button");
+const reviewPreviewModal = document.getElementById("review-preview-modal");
+const closeReviewPreview = document.getElementById("close-review-preview");
+const backToReview = document.getElementById("back-to-review");
+
+const previewReviewTitle = document.getElementById("preview-review-title");
+const previewReviewerName = document.getElementById("preview-reviewer-name");
+const previewReviewRating = document.getElementById("preview-review-rating");
+const previewReviewComment = document.getElementById("preview-review-comment");
+
+previewReviewButton.addEventListener("click", () => {
+
+    const reviewerName = document.getElementById("reviewer-name").value.trim();
+    const reviewTitle = document.getElementById("review-title").value.trim();
+    const comment = document.getElementById("review-comment").value.trim();
+    const isbn = document.getElementById("modal-isbn").textContent;
+
+    if (!reviewerName || !reviewTitle || !comment || selectedReviewScore === 0) {
+        alert("Completa todos los campos y selecciona una calificación.");
+        return;
+    }
+
+    fetch(`/api/books/${isbn}/reviews/preview`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            reviewerName: reviewerName,
+            reviewTitle: reviewTitle,
+            comment: comment,
+            score: selectedReviewScore
+        })
+    })
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(error => {
+                    throw new Error(
+                        error.error || "No se pudo generar la vista previa."
+                    );
+                });
+            }
+
+            return response.json();
+        })
+        .then(data => {
+            console.log("Vista previa recibida:", data);
+
+            previewReviewTitle.textContent = reviewTitle;
+            previewReviewerName.textContent = reviewerName;
+            previewReviewComment.textContent = comment;
+
+            previewReviewRating.textContent =
+                "★".repeat(selectedReviewScore) +
+                "☆".repeat(5 - selectedReviewScore);
+
+            reviewModal.style.display = "none";
+            reviewPreviewModal.style.display = "flex";
+        })
+        .catch(error => {
+            console.error("Error al generar la vista previa:", error);
+            alert(error.message);
+        });
+});
+
+backToReview.addEventListener("click", () => {
+    reviewPreviewModal.style.display = "none";
+    reviewModal.style.display = "flex";
+});
+
+closeReviewPreview.addEventListener("click", () => {
+    reviewPreviewModal.style.display = "none";
+});
+
+reviewPreviewModal.addEventListener("click", (event) => {
+    if (event.target.id === "review-preview-modal") {
+        reviewPreviewModal.style.display = "none";
+    }
+});
+
+const publishReviewButton = document.getElementById("publish-review");
+
+publishReviewButton.addEventListener("click", () => {
+    const reviewerName =
+        document.getElementById("reviewer-name").value.trim();
+
+    const reviewTitle =
+        document.getElementById("review-title").value.trim();
+
+    const comment =
+        document.getElementById("review-comment").value.trim();
+
+    const isbn =
+        document.getElementById("modal-isbn").textContent;
+
+    fetch(`/api/books/${isbn}/reviews`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            reviewerName: reviewerName,
+            reviewTitle: reviewTitle,
+            comment: comment,
+            score: selectedReviewScore
+        })
+    })
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(error => {
+                    throw new Error(
+                        error.error || "No se pudo publicar la reseña."
+                    );
+                });
+            }
+
+            return response.json();
+        })
+        .then(data => {
+            console.log("Reseña publicada:", data);
+
+            alert("¡Reseña publicada con éxito!");
+
+            reviewPreviewModal.style.display = "none";
+            reviewModal.style.display = "none";
+        })
+        .catch(error => {
+            console.error("Error al publicar la reseña:", error);
+            alert(error.message);
+        });
+});
+
 document.getElementById("close-modal").addEventListener("click", () => {
     document.getElementById("book-modal").style.display = "none";
 });
@@ -147,6 +312,24 @@ document.getElementById("close-modal").addEventListener("click", () => {
 document.getElementById("close-modal").addEventListener("click", (event) => {
     if (event.target.id === "book-modal"){
         document.getElementById("close-modal").style.display = "none";
+    }
+});
+
+const writeReviewButton = document.getElementById("write-review-button");
+const reviewModal = document.getElementById("review-modal");
+const closeReviewModal = document.getElementById("close-review-modal");
+
+writeReviewButton.addEventListener("click", () => {
+    reviewModal.style.display = "flex";
+});
+
+closeReviewModal.addEventListener("click", () => {
+    reviewModal.style.display = "none";
+});
+
+reviewModal.addEventListener("click", (event) => {
+    if (event.target.id === "review-modal") {
+        reviewModal.style.display = "none";
     }
 });
 
